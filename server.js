@@ -41,10 +41,12 @@ app.use(
 app.use(passUserToView);
 /* Routes */
 app.get("/", async (req, res) => {
+  console.log(req.session.user);
   res.render("index.ejs");
 });
 /* Controllers */
 app.use("/auth", authController);
+app.use(isSignedIn);
 app.use("/users/:userId/foods", foodsController);
 
 app.listen(port, () => {
