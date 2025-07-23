@@ -1,22 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Page</title>
-  </head>
-
-  <body>
-    <% if (user) { %>
-    <h1>Welcome to the app, <%= user.username %>!</h1>
-    <p>
-      <a href="/auth/sign-out">Sign-Out</a>
-    </p>
-    <% } else { %>
-    <h1>Welcome to the app!</h1>
-    <a href="/auth/sign-up">Sign up</a>
-    <a href="/auth/sign-in">sign in</a>
-    <% } %>
-    <p><a href="/vip-lounge">Get into the VIP Users Only lounge!</a></p>
-  </body>
+<%- include('./partials/html-head.ejs', {title: 'Home'}) %>
+<%- include('./partials/nav-bar.ejs') %>
+<body>
+  <section class="section">
+  <% if (user) { %>
+  <h1 class="title">Welcome to your cookbook, <%= user.username %>!</h1>
+  <p>
+    <a href="/auth/sign-out">Sign-Out</a>
+  </p>
+  <% } else { %>
+  <h1 class="title">Welcome to Your Cookbook!</h1>
+  <a class="button" href="/auth/sign-up">Sign up</a>
+  <a class="button" href="/auth/sign-in">sign in</a>
+  <% } %>
+  </section>
+</body>
 </html>

@@ -8,6 +8,7 @@ const methodOverride = require("method-override");
 const morgan = require("morgan");
 const session = require("express-session");
 const authController = require("./controllers/auth.js");
+const foodsController = require("./controllers/foods.js");
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : "3000";
 const MongoStore = require("connect-mongo");
@@ -18,7 +19,7 @@ const passUserToView = require("./middleware/pass-user-to-view.js");
 mongoose.connection.on("connected", () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
 });
-
+/* MiddleWare */
 // Middleware to parse URL-encoded data from forms
 app.use(express.urlencoded({ extended: false }));
 // Middleware for using HTTP verbs such as PUT or DELETE
@@ -38,16 +39,13 @@ app.use(
 );
 
 app.use(passUserToView);
-
+/* Routes */
 app.get("/", async (req, res) => {
   res.render("index.ejs");
 });
-
+/* Controllers */
 app.use("/auth", authController);
-
-app.get("/vip-lounge", isSignedIn, (req, res) => {
-  res.send(`Welcome to the party ${req.session.user.username}`);
-});
+app.use("/users/:userId/foods", foodsController);
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
