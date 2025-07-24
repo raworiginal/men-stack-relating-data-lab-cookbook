@@ -41,8 +41,12 @@ app.use(
 app.use(passUserToView);
 /* Routes */
 app.get("/", async (req, res) => {
-  console.log(req.session.user);
-  res.render("index.ejs");
+  if (req.session.user) {
+    console.log(req.session.user._id);
+    res.redirect(`/users/${req.session.user._id}/foods`);
+  } else {
+    res.render("index.ejs");
+  }
 });
 /* Controllers */
 app.use("/auth", authController);

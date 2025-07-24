@@ -1,5 +1,10 @@
-<%- include('../partials/html-head.ejs', {title: 'Pantry'}) %>
-<%- include('../partials/nav-bar.ejs') %>
-<h1>Welcome to my Pantry</h1>
+<%- include('../partials/_html-head.ejs', {title: 'Pantry'}) %>
+<%- include('../partials/_nav-bar.ejs') %>
+<article>
+  <h1>Welcome to my Pantry</h1>
+  <a href="/users/<%= user._id %>/foods/new">
+    <button>Add new</button>
+  </a>
+</article>
 </body>
 </html>
