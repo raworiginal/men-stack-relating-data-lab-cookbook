@@ -9,6 +9,7 @@ const morgan = require("morgan");
 const session = require("express-session");
 const authController = require("./controllers/auth.js");
 const foodsController = require("./controllers/foods.js");
+const usersController = require("./controllers/users.js");
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : "3000";
 const MongoStore = require("connect-mongo");
@@ -41,16 +42,12 @@ app.use(
 app.use(passUserToView);
 /* Routes */
 app.get("/", async (req, res) => {
-  if (req.session.user) {
-    console.log(req.session.user._id);
-    res.redirect(`/users/${req.session.user._id}/foods`);
-  } else {
-    res.render("index.ejs");
-  }
+  res.render("index.ejs");
 });
 /* Controllers */
 app.use("/auth", authController);
 app.use(isSignedIn);
+app.use("/users", usersController);
 app.use("/users/:userId/foods", foodsController);
 
 app.listen(port, () => {

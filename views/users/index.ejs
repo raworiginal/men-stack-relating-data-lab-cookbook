@@ -1,0 +1,16 @@
+<%- include('../partials/_html-head.ejs', {title: 'Community'}) %>
+<%- include('../partials/_nav-bar.ejs') %>
+
+<article>
+  <h1>Welcome to Our Community</h1>
+
+  <ul>
+  <% allUsers.forEach((user)=>{ %>
+      <a href="/users/<%= user._id %>/foods">
+        <li><%= user.username %></li>
+      </a>
+      <% }); %>
+    </ul>
+</article>
+</body>
+</html>
