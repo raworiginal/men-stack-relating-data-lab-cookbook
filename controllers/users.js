@@ -8,7 +8,6 @@ router.get("/", async (req, res) => {
     const allUsers = await User.find({
       username: { $ne: currentUser.username },
     });
-    console.log(allUsers);
     res.render("users/index.ejs", {
       allUsers,
     });
