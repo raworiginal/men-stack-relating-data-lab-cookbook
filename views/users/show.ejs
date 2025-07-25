@@ -2,11 +2,17 @@
 <%- include("../partials/_nav-bar.ejs") %>
 <article>
   <h1><%= otherUser %>'s Pantry</h1>
+  <% if (pantry.length === 0) { %>
+  <p><%= otherUser %> has nothing in their pantry</p>
+  <% } else { %>
+
   <ul>
-  <% pantry.forEach((food)=>{ %>
+    <% pantry.forEach((food)=>{ %>
     <li><%= food.name %></li>
- <% }) %>
+    <% }) %>
   </ul>
+  <% } %>
 </article>
 </body>
+
 </html>

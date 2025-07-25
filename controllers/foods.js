@@ -3,19 +3,8 @@ const router = express.Router();
 
 const User = require("../models/user.js");
 
-/* ====================== Router ==================== */
-router.get("/", async (req, res) => {
-  try {
-    const currentUser = await User.findById(req.session.user._id);
-    res.render("foods/index.ejs", {
-      pantry: currentUser.pantry,
-    });
-  } catch (error) {
-    console.log(error);
-    res.redirect("/");
-  }
-});
 /* ================ CREATE ================ */
+
 router.get("/new", (req, res) => {
   res.render("foods/new.ejs");
 });
@@ -32,6 +21,19 @@ router.post("/", async (req, res) => {
 });
 
 /* ================ READ ================ */
+
+router.get("/", async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.session.user._id);
+    res.render("foods/index.ejs", {
+      pantry: currentUser.pantry,
+    });
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
+});
+
 router.get("/:foodId", async (req, res) => {
   try {
     const currentUser = await User.findById(req.session.user._id);
@@ -42,7 +44,9 @@ router.get("/:foodId", async (req, res) => {
     res.redirect("/");
   }
 });
+
 /* ================ UPDATE ================ */
+
 router.get("/:foodId/edit", async (req, res) => {
   try {
     const currentUser = await User.findById(req.session.user._id);
@@ -69,6 +73,7 @@ router.put("/:foodId", async (req, res) => {
   }
 });
 /* ================ DELETE ================ */
+
 router.delete("/:foodId", async (req, res) => {
   try {
     const currentUser = await User.findById(req.session.user._id);

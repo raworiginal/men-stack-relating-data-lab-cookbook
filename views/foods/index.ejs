@@ -1,19 +1,21 @@
 <%- include('../partials/_html-head.ejs', {title: 'Pantry'}) %>
 <%- include('../partials/_nav-bar.ejs') %>
-
 <article>
-  <h1>Welcome to my Pantry</h1>
-  <h2>Current Foods</h2>
+  <h1>Welcome to Your Pantry</h1>
+  <% if (pantry.length === 0) { %>
+  <p>There is nothing in this pantry</p>
+  <% } else { %>
   <ul>
-  <% pantry.forEach((food)=>{ %>
-    <a href="/users/<%= user._id %>/foods/<%= food._id %>">
-      <li><%= food.name %></li>
+    <% pantry.forEach((food) => { %><a href="/users/<%= user._id %>/foods/<%= food._id %>">
+      <li>
+        <%= food.name %>
+      </li>
     </a>
-  <% }) %>
+    <% }) %>
   </ul>
-  <a href="/users/<%= user._id %>/foods/new">
-    <button>Add new</button>
-  </a>
+  <% } %><a href="/users/<%= user._id %>/foods/new"> <button>Add
+      new</button> </a>
 </article>
 </body>
+
 </html>

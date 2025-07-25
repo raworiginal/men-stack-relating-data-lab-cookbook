@@ -2,14 +2,16 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user.js");
 
+/* ==================== READ ==================== */
+/* All Users */
 router.get("/", async (req, res) => {
   try {
     const currentUser = await User.findById(req.session.user._id);
-    const allUsers = await User.find({
+    const allOtherUsers = await User.find({
       username: { $ne: currentUser.username },
     });
     res.render("users/index.ejs", {
-      allUsers,
+      allOtherUsers,
     });
   } catch (error) {
     console.log(error);
@@ -17,6 +19,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+/* One User */
 router.get("/:userId", async (req, res) => {
   try {
     const otherUser = await User.findById(req.params.userId);
@@ -29,5 +32,6 @@ router.get("/:userId", async (req, res) => {
     res.redirect("/");
   }
 });
+
 /* ================ Export ================ */
 module.exports = router;
