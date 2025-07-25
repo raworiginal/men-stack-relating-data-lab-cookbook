@@ -36,11 +36,13 @@ router.get("/:foodId", async (req, res) => {
   try {
     const currentUser = await User.findById(req.session.user._id);
     const foodItem = currentUser.pantry.id(req.params.foodId);
-    res.send(`This page is for ${foodItem}`);
+    res.render("foods/show.ejs", { foodItem: foodItem });
   } catch (error) {
     console.log(error);
     res.redirect("/");
   }
 });
+/* ================ UPDATE ================ */
+/* ================ DELETE ================ */
 /* ================ Export ================ */
 module.exports = router;
