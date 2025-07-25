@@ -2,6 +2,14 @@
 <%- include('../partials/_nav-bar.ejs') %>
 <article>
   <h1>Welcome to my Pantry</h1>
+  <h2>Current Foods</h2>
+  <ul>
+  <% pantry.forEach((food)=>{ %>
+    <a href="/users/<%= user._id %>/foods/<%= food._id %>">
+      <li><%= food.name %></li>
+    </a>
+  <% }) %>
+  </ul>
   <a href="/users/<%= user._id %>/foods/new">
     <button>Add new</button>
   </a>

@@ -3,18 +3,12 @@ const router = express.Router();
 
 const User = require("../models/user.js");
 
-/* ====================== Helper Fn ==================== */
-
-const getCurrentUser = async (userId) => {
-  return await User.findById(userId);
-};
-
 /* ====================== Router ==================== */
 router.get("/", async (req, res) => {
   try {
-    const currentUser = getCurrentUser(req.session.user._id);
+    const currentUser = await User.findById(req.session.user._id);
     res.render("foods/index.ejs", {
-      currentUser: currentUser.foods,
+      pantry: currentUser.pantry,
     });
   } catch (error) {
     console.log(error);
@@ -27,7 +21,7 @@ router.get("/new", (req, res) => {
 });
 router.post("/", async (req, res) => {
   try {
-    const currentUser = getCurrentUser(req.session.user._id);
+    const currentUser = await User.findById(req.session.user._id);
     currentUser.pantry.push(req.body);
     await currentUser.save();
     res.redirect("/");
@@ -37,5 +31,16 @@ router.post("/", async (req, res) => {
   }
 });
 
+/* ================ READ ================ */
+router.get("/:foodId", async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.session.user._id);
+    const foodItem = currentUser.pantry.id(req.params.foodId);
+    res.send(`This page is for ${foodItem}`);
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
+});
 /* ================ Export ================ */
 module.exports = router;
