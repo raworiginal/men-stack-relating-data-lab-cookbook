@@ -17,7 +17,12 @@ router.get("/", async (req, res) => {
 
 router.get("/:userId", async (req, res) => {
   try {
-    res.send("this will be the user pantry");
+    const otherUser = await User.findById(req.params.userId);
+    console.log(otherUser);
+    res.render("users/show.ejs", {
+      otherUser: otherUser.username,
+      pantry: otherUser.pantry,
+    });
   } catch (error) {
     console.log(error);
     res.redirect("/");
