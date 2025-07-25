@@ -5,12 +5,13 @@
   <h1>Welcome to Our Community</h1>
 
   <ul>
-  <% allOtherUsers.forEach((user)=>{ %>
-      <a href="/users/<%= user._id%>">
-        <li><%= user.username %></li>
-      </a>
-      <% }); %>
-    </ul>
+    <% allOtherUsers.forEach((user)=>{ %>
+    <a href="/users/<%= user._id%>">
+      <li><%= user.username %></li>
+    </a>
+    <% }); %>
+  </ul>
 </article>
 </body>
+
 </html>
