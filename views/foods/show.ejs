@@ -2,10 +2,10 @@
 <%- include("../partials/_nav-bar.ejs") %>
 <article>
   <h1><%= food.name %></h1>
-  <a href="#">Edit</a>
+  <a href="/users/<%=user._id%>/foods/<%=food._id%>/edit">Edit</a>
   <form action="/users/<%= user._id %>/foods/<%=food._id%>?_method=DELETE" method="POST">
     <button type="submit">Delete</button>
   </form>
 </article>
-
+</body>
 </html>

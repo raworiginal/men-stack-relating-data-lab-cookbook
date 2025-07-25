@@ -1,0 +1,12 @@
+<%- include('../partials/_html-head.ejs', {title: 'Edit Food'}) %>
+<%-include('../partials/_nav-bar.ejs') %>
+
+<article>
+  <form action="/users/<%= user._id %>/foods/<%= food._id %>?_method=PUT" method="post">
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" value="<%=food.name %>"/>
+    <button type="submit">Edit Food</button>
+  </form>
+
+</body>
+</html>

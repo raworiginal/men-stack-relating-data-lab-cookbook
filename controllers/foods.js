@@ -43,7 +43,31 @@ router.get("/:foodId", async (req, res) => {
   }
 });
 /* ================ UPDATE ================ */
+router.get("/:foodId/edit", async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.session.user._id);
+    const food = currentUser.pantry.id(req.params.foodId);
+    res.render("foods/edit.ejs", {
+      food: food,
+    });
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
+});
 
+router.put("/:foodId", async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.session.user._id);
+    const food = currentUser.pantry.id(req.params.foodId);
+    food.set(req.body);
+    await currentUser.save();
+    res.redirect(`/users/${currentUser._id}/foods/${req.params.foodId}`);
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
+});
 /* ================ DELETE ================ */
 router.delete("/:foodId", async (req, res) => {
   try {
