@@ -4,7 +4,10 @@ const User = require("../models/user.js");
 
 router.get("/", async (req, res) => {
   try {
-    const allUsers = await User.find({});
+    const currentUser = await User.findById(req.session.user._id);
+    const allUsers = await User.find({
+      username: { $ne: currentUser.username },
+    });
     console.log(allUsers);
     res.render("users/index.ejs", {
       allUsers,
@@ -18,7 +21,6 @@ router.get("/", async (req, res) => {
 router.get("/:userId", async (req, res) => {
   try {
     const otherUser = await User.findById(req.params.userId);
-    console.log(otherUser);
     res.render("users/show.ejs", {
       otherUser: otherUser.username,
       pantry: otherUser.pantry,
