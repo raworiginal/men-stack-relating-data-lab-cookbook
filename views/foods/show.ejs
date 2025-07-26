@@ -1,11 +1,14 @@
 <%- include("../partials/_html-head.ejs", {title: 'food'}) %>
 <%- include("../partials/_nav-bar.ejs") %>
-<article>
+
+<main>
   <h1><%= food.name %></h1>
   <a href="/users/<%=user._id%>/foods/<%=food._id%>/edit">Edit</a>
   <form action="/users/<%= user._id %>/foods/<%=food._id%>?_method=DELETE" method="POST">
     <button type="submit">Delete</button>
   </form>
-</article>
+</main>
+
 </body>
+
 </html>

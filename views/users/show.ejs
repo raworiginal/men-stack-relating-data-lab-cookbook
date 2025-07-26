@@ -1,6 +1,7 @@
 <%- include("../partials/_html-head.ejs", {title: 'food'}) %>
 <%- include("../partials/_nav-bar.ejs") %>
-<article>
+
+<main>
   <h1><%= otherUser %>'s Pantry</h1>
   <% if (pantry.length === 0) { %>
   <p><%= otherUser %> has nothing in their pantry</p>
@@ -12,7 +13,8 @@
     <% }) %>
   </ul>
   <% } %>
-</article>
+</main>
+
 </body>
 
 </html>
